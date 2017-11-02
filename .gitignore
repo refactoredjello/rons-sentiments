@@ -4,6 +4,9 @@
 # production
 /public/compiled
 
+#api keys
+/private
+
 # misc
 .DS_Store
 .env.local
