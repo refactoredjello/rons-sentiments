@@ -8,16 +8,23 @@ var textapi = new AYLIENTextAPI({
   application_key: credentials.key
 });
 
+var getTitle = (url, cb) => {
+  textapi.extract({url: url, best_image: false},
+    (err, resp) => err !== null ? console.log(err) : cb(resp.title)
+  );
+}
+
 module.exports.getSummary = (url, cb) => {
     textapi.summarize({
     url: url,
     sentences_percentage: 20
-  }, function(error, response) {
-    if (error) cb(error);
-    if (error === null) {
-      cb(response.sentences);
-    }
+  }, 
+  (err, resp) => err !== null ? console.log(err) : 
+  getTitle(url, (title) =>  {
+    console.log(title);
+    cb({title: title, summary: resp.sentences})
   })
+  );
 };
 
 module.exports.getRon = (cb) => {

@@ -1,5 +1,6 @@
 var textapi = require('./text.js');
 
+var db = require('./db');
 var express = require('express');
 var bodyParser = require('body-parser');
 
@@ -16,7 +17,6 @@ app.post('/summary', (req, res) => {
 
 app.get('/rons-words', (req, res) => {
   textapi.getRon((data) => {
-    console.log(data);
     res.send(data);
   });
 });

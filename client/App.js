@@ -4,7 +4,7 @@ class App extends React.Component {
     this.state = {
       ronSays: [],
       url: '',
-      summary: [],
+      article: {summary: [], title: ''}
     }
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,9 +15,9 @@ class App extends React.Component {
   handleInput(event) {
     this.setState({url: event.target.value});
   }
-  handleGetSummary(summary){
-    this.setState({summary: summary})
-    console.log(this.state.summary);
+  handleGetSummary(data){
+    this.setState({article: data});
+    console.log(this.state.article);
   }
   handleRon(ronsWords) {
     this.setState({ronSays: ronsWords.data});
@@ -35,8 +35,10 @@ class App extends React.Component {
     })
     .catch((error) => console.log(error));
   }
+
+  //TODO render title
   render() {
-    let summary = this.state.summary;
+    let {summary, title} = this.state.article;
     let ronSays = this.state.ronSays;
     return (
       <div className="App">

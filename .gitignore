@@ -3,6 +3,7 @@
 
 # production
 /public/compiled
+/db/data
 
 #api keys
 /private
