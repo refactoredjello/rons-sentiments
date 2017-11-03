@@ -25,7 +25,7 @@ class App extends React.Component {
   }
   handleSubmit() {
     let url = this.state.url;
-    //clear the input text aftersubmission
+    //clear the input text after submission
     this.state.url = '';
     axios.post('/summary', {url: url})
     .then((response) =>  {
@@ -51,7 +51,7 @@ class App extends React.Component {
           <button className="submit" onClick={this.handleSubmit}>Analyze Text</button>
         </div>
         <div className="article">
-          {summary.length > 0 ? <h3>Summary:</h3> : null}
+          {summary.length > 0 ? <h3>Summary (article reduced by 80%):</h3> : null}
           {summary.map((sentence, idx) => <Sentence sentence={sentence} key={idx}/>)}
           {ronSays.length > 0 ? <h3>How does ron feel about it:</h3> : null}
           {ronSays.length > 0 ? <p className="ron">{ronSays}</p> : null}

@@ -11,7 +11,7 @@ var textapi = new AYLIENTextAPI({
 module.exports.getSummary = (url, cb) => {
     textapi.summarize({
     url: url,
-    sentences_number: 5
+    sentences_percentage: 20
   }, function(error, response) {
     if (error) cb(error);
     if (error === null) {
