@@ -1,12 +1,14 @@
 var AYLIENTextAPI = require('aylien_textapi');
 var credentials = require('./private/aylien_text_credentials.js');
 
+var request = require('request');
+
 var textapi = new AYLIENTextAPI({
   application_id: credentials.id,
   application_key: credentials.key
 });
 
-var getSummary = (url, cb) => {
+module.exports.getSummary = (url, cb) => {
     textapi.summarize({
     url: url,
     sentences_number: 5
@@ -16,12 +18,14 @@ var getSummary = (url, cb) => {
       cb(response.sentences);
     }
   })
-}
-module.exports = getSummary;
-// module.exports = textapi.sentiment({
-//   'text': 'John is a very good football player!'
-// }, function(error, response) {
-//   if (error === null) {
-//     console.log(response);
-//   }
-// });
+};
+
+module.exports.getRon = (cb) => {
+  let url = 'http://ron-swanson-quotes.herokuapp.com/v2/quotes';
+  request(url, (err, resp, body) => {
+    err ? cb(err) : cb(body);
+  })
+};
+
+
+
