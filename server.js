@@ -1,16 +1,23 @@
+var textapi = require('./text.js');
+
 var express = require('express');
-var textapi = require('./text.js')
+var bodyParser = require('body-parser');
 var app = express();
 app.use(express.static(__dirname + '/public'));
 app.use('/scripts', express.static(__dirname + '/node_modules'));
 
-app.get('/', (req, res) => {
-  ;
-  res.send(__dirname + '/public/index.html')
+//todo build out post from react;
+app.use('/summary', bodyParser.json());
+app.post('/summary', (req, res) => {
+  textapi(req.body.url, (data) => {
+    res.send(data)
+  })
 });
+//todo get ron quote
+//todo get sentiment
 
 
-// get quote
+
 // get sentiment
 
 
