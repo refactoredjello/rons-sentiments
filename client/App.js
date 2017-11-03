@@ -2,28 +2,42 @@ class App extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      ronSays: null,
+      ronSays: [],
       url: '',
-      summary: null,
+      summary: [],
     }
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleGetSummary = this.handleGetSummary.bind(this);
+    this.handleRon = this.handleRon.bind(this);
 
   }
   handleInput(event) {
     this.setState({url: event.target.value});
   }
-  handleGetSummary(data){
-    this.setState({summary: data})
+  handleGetSummary(summary){
+    this.setState({summary: summary})
     console.log(this.state.summary);
   }
+  handleRon(ronsWords) {
+    this.setState({ronSays: ronsWords.data});
+    console.log(this.state.ronSays);
+  }
   handleSubmit() {
-    axios.post('/summary', {url: this.state.url})
-    .then((response) => this.handleGetSummary(response.data))
+    let url = this.state.url;
+    //clear the input text aftersubmission
+    this.state.url = '';
+    axios.post('/summary', {url: url})
+    .then((response) =>  {
+      this.handleGetSummary(response.data)
+      return axios.get('/rons-words')
+      .then(this.handleRon)
+    })
     .catch((error) => console.log(error));
   }
   render() {
+    let summary = this.state.summary;
+    let ronSays = this.state.ronSays;
     return (
       <div className="App">
         <header className="App-header">
@@ -37,7 +51,10 @@ class App extends React.Component {
           <button className="submit" onClick={this.handleSubmit}>Analyze Text</button>
         </div>
         <div className="article">
-        {/*this.props.summary.map((sentence) => <Sentence sentence={sentence}/>*/}
+          {summary.length > 0 ? <h3>Summary:</h3> : null}
+          {summary.map((sentence, idx) => <Sentence sentence={sentence} key={idx}/>)}
+          {ronSays.length > 0 ? <h3>How does ron feel about it:</h3> : null}
+          {ronSays.length > 0 ? <p className="ron">{ronSays}</p> : null}
         </div>
       </div>
     );
