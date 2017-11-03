@@ -8,13 +8,20 @@ class App extends React.Component {
     }
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleGetSummary = this.handleGetSummary.bind(this);
+
   }
   handleInput(event) {
     this.setState({url: event.target.value});
   }
+  handleGetSummary(data){
+    this.setState({summary: data})
+    console.log(this.state.summary);
+  }
   handleSubmit() {
-    console.log(this.state.url);
-
+    axios.post('/summary', {url: this.state.url})
+    .then((response) => this.handleGetSummary(response.data))
+    .catch((error) => console.log(error));
   }
   render() {
     return (
