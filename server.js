@@ -20,14 +20,5 @@ app.get('/rons-words', (req, res) => {
     res.send(data);
   });
 });
-//todo get ron quote
-//todo get sentiment
-
-
-
-// get sentiment
-
-
-
 
 module.exports = app;
