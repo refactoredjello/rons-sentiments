@@ -15,7 +15,6 @@
     "request": "^2.83.0"
   },
   "scripts": {
-    "prestart": "babel ./client --out-dir ./public/compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline",
     "start": "node ./index.js",
     "build": "babel ./client --out-dir ./public/compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline -w"
   },
