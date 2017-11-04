@@ -10,6 +10,13 @@ app.use('/scripts', express.static(__dirname + '/node_modules'));
 
 app.use('/summary', bodyParser.json());
 
+
+app.get('/results', (req, res) => {
+  db.selectAll((err, items) => {
+    err !== null ? res.send(items) : console.log(err);
+  })
+});
+
 //save the summary temporarily for later db write
 var tempSummTitle;
 app.post('/summary', (req, res) => {
@@ -25,9 +32,9 @@ app.get('/rons-words', (req, res) => {
     //write to db and clear temp
     db.insert(tempSummTitle, () => {
       tempSummTitle = {} 
-      db.selectAll((err, collection) => {
-        err !== null ? console.log(err) : console.log('DB DATA: ', collection)
-      });
+      // db.selectAll((err, collection) => {
+      //   err !== null ? console.log(err) : console.log('DB DATA: ', collection)
+      // });
     });
     res.send(data);
   });

@@ -22,7 +22,11 @@ var selectAll = (cb) => {
 
 var insert = ({url, title, ronSays}, cb) => {
   let newItem = new Item({url: url, title: title, ronSays: ronSays})
-  newItem.save((err) => err ? console.log(err): console.log(newItem.title, ' saved'))
+  newItem.save((err) => {
+    err ? console.log(err): 
+    cb()
+    console.log(newItem.title, ' saved')
+  })
 }
 
 module.exports.insert = insert;
