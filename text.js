@@ -1,5 +1,5 @@
 var AYLIENTextAPI = require('aylien_textapi');
-var credentials = require('./private/aylien_text_credentials.js');
+var credentials = process.env.aylienId ? null : require('./private/aylien_text_credentials.js');
 
 var request = require('request');
 
