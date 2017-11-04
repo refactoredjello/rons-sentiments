@@ -7,13 +7,13 @@ var bodyParser = require('body-parser');
 var app = express();
 app.use(express.static(__dirname + '/public'));
 app.use('/scripts', express.static(__dirname + '/node_modules'));
-
 app.use('/summary', bodyParser.json());
 
 
+//ROUTES -->
 app.get('/results', (req, res) => {
   db.selectAll((err, items) => {
-    err !== null ? res.send(items) : console.log(err);
+    err !== null ? console.log(err) : res.send(items);
   })
 });
 
