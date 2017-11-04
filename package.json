@@ -15,9 +15,7 @@
     "request": "^2.83.0"
   },
   "scripts": {
-    "prestart": "mongod --dbpath ./db/data --fork --logpath /dev/null",
     "start": "nodemon ./index.js",
-    "poststop": "mongo admin --eval 'db.shutdownServer()' > /dev/null",
     "build": "babel ./client --out-dir ./public/compiled --presets=es2015,react --ignore=node_modules,compiled --source-maps inline -w"
   },
   "devDependencies": {

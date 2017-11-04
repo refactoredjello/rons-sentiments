@@ -4,8 +4,8 @@ var credentials = require('./private/aylien_text_credentials.js');
 var request = require('request');
 
 var textapi = new AYLIENTextAPI({
-  application_id: credentials.id,
-  application_key: credentials.key
+  application_id: process.env.aylienId || credentials.id,
+  application_key: process.env.aylienKey || credentials.key
 });
 
 var getTitle = (url, cb) => {
@@ -21,7 +21,7 @@ module.exports.getSummary = (url, cb) => {
   }, 
   (err, resp) => err !== null ? console.log(err) : 
   getTitle(url, (title) =>  {
-    console.log(title);
+    // console.log(title);
     cb({title: title, summary: resp.sentences})
   })
   );

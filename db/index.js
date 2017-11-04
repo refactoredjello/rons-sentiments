@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/data');
+const user = process.env.user;
+const pass = process.env.pass;
+mongoose.connect(`mongodb://${user}:${pass}@ds243055.mlab.com:43055/rons_sentiments`);
 var db = mongoose.connection;
 
 db.on('error', () => console.log('db connection error'));
