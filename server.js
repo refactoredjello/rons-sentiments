@@ -10,7 +10,6 @@ app.use('/scripts', express.static(__dirname + '/node_modules'));
 app.use('/summary', bodyParser.json());
 
 
-//ROUTES -->
 app.get('/results', (req, res) => {
   db.selectAll((err, items) => {
     err !== null ? console.log(err) : res.send(items);
@@ -32,9 +31,6 @@ app.get('/rons-words', (req, res) => {
     //write to db and clear temp
     db.insert(tempSummTitle, () => {
       tempSummTitle = {} 
-      // db.selectAll((err, collection) => {
-      //   err !== null ? console.log(err) : console.log('DB DATA: ', collection)
-      // });
     });
     res.send(data);
   });
